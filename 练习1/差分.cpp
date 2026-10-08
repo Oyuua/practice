@@ -95,7 +95,7 @@ int main() {
 
     for (size_t i = 0; i < res.size(); ++i) {
         if (i) cout << " ";//用空格间隔开
-        //补前导0
+        //cin会吞掉前导0，需要补前导0
         cout.fill('0');
         cout.width(5);
         cout << res[i];
