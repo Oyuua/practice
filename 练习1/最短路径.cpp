@@ -61,3 +61,50 @@ vector<int> dist(N, -1);
 
     return 0;
 }
+
+
+//方法二
+#include <iostream>
+#include <vector>
+
+using namespace std;
+const int INF=0x3f3f3f3f;
+//竞赛中常用0x3f3f3f3f代替INT_MAX，防止溢出；
+struct Edge{
+    int start;
+    int end;
+    int weight;
+};
+vector<Edge> edges;
+
+int main(){
+    int N,M;
+    while(!((N==0)&&(M=0))){
+        cin>>N>>M;
+    edges.clear();
+    for(int i=0;i<M;i++){
+        //输入边
+        int s,e,w;
+        cin>>s>>e>>w;
+        edges.push_back({s,e,w});
+        edges.push_back({e,s,w});
+    }
+    int a[105];
+    for(int i=0;i<105;i++) a[i]=INT_MAX;
+    //或vector<int> a(105,INT_MAX);
+    a[1]=0;
+    bool update=true;
+    for(int i=0;i<N-1 && update;i++){
+        update = false;//如果不更新了，则退出迭代
+    for(Edge e:edges){//从edges循环取出赋给Edge e
+        if(a[e.start]!=INT_MAX && a[e.start]+e.weight<a[e.end]){
+            a[e.end]=a[e.start]+e.weight;
+            update=true;
+        }
+    }
+}
+cout<<a[N]<<endl;
+}
+
+return 0;
+}
